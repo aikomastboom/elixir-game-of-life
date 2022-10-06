@@ -11,7 +11,7 @@ defmodule GameOfLife do
   """
   def game_of_life(iterations) do
     with {:ok, new_world} <- World.generate_world(10),
-      do: simulate_iterations(iterations, new_world)
+         do: simulate_iterations(iterations, new_world)
   end
 
   def simulate_iterations(iterations, world) when iterations <= 1 do

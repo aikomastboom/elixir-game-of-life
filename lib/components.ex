@@ -2,8 +2,8 @@ defmodule GameOfLife.Components do
   use Phoenix.Component
 
   attr :world, :list, default: []
-  slot :alive
-  slot :dead
+  slot(:alive)
+  slot(:dead)
 
   def world(assigns) do
     ~H"""
