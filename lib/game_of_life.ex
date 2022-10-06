@@ -15,11 +15,11 @@ defmodule GameOfLife do
   end
 
   def simulate_iterations(iterations, world) when iterations <= 1 do
-    GameOfLife.Simulate.simulate(world)
+    Simulate.simulate(world)
   end
 
   def simulate_iterations(iterations, world) do
-    new_world = GameOfLife.Simulate.simulate(world)
+    new_world = Simulate.simulate(world)
     simulate_iterations(iterations - 1, new_world)
   end
 end

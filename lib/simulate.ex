@@ -90,7 +90,7 @@ defmodule GameOfLife.Simulate do
         end
     end
 
-    def is_cell_alive?(cell_x, cell_y, world) when cell_x < 0 or cell_y < 0 do
+    def is_cell_alive?(cell_x, cell_y, _world) when cell_x < 0 or cell_y < 0 do
         false
     end
 end

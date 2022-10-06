@@ -12,7 +12,7 @@ defmodule GameOfLife.World do
         10
     """
     def generate_random_row (number) do
-        for n <- 1..number do
+        for _ <- 1..number do
             if :rand.uniform >= 0.7 do
                 1
             else
@@ -31,7 +31,7 @@ defmodule GameOfLife.World do
 
     """
     def generate_world(size) do
-        for n <- 1..size do
+        for _ <- 1..size do
             generate_random_row(size)
         end
     end
