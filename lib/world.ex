@@ -36,6 +36,30 @@ defmodule GameOfLife.World do
     end
   end
 
+  def flip_cell(world, x, y) do
+    Enum.with_index(world, fn row, h ->
+      if x == h do
+        Enum.with_index(row, fn col, v ->
+          if y == v do
+            invert(col)
+          else
+            col
+          end
+        end)
+      else
+        row
+      end
+    end)
+  end
+
+  defp invert(1) do
+    0
+  end
+
+  defp invert(0) do
+    1
+  end
+
   def print_world(world) do
     Enum.map(world, fn x -> Enum.join(x, ", ") end)
     |> Enum.map(fn x -> IO.puts(x) end)
