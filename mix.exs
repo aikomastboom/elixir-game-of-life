@@ -28,6 +28,8 @@ defmodule GameOfLife.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:phoenix_live_view, "~> 0.18"}
+    ]
   end
 end
