@@ -12,15 +12,15 @@ defmodule GameOfLife.Components do
         <tr height="32">
           <%= for {c,y} <- Enum.with_index(r) do %>
             <%= if c == 1 do %>
-              <td width="32" class="bg-blue-500 align-middle text-center">
+              <td width="32" class="bg-blue-500 align-middle text-center cursor-pointer">
                 <b>
-                  <%= render_slot(@alive, [x, y]) || "@" %>
+                  <%= render_slot(@alive, "#{x},#{y}") || "@" %>
                 </b>
               </td>
             <% else %>
-              <td width="32" class="bg-red-500 align-middle text-center">
+              <td width="32" class="bg-red-500 align-middle text-center cursor-pointer">
                 <b>
-                  <%= render_slot(@dead, [x, y]) || "\u00B7" %>
+                  <%= render_slot(@dead, "#{x},#{y}") || "\u00B7" %>
                 </b>
               </td>
             <% end %>
