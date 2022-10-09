@@ -36,6 +36,18 @@ defmodule GameOfLife.World do
     end
   end
 
+  def generate_empty_row(size) do
+    for _ <- 1..size do
+      0
+    end
+  end
+
+  def generate_empty_world(size) do
+    for _ <- 1..size do
+      generate_empty_row(size)
+    end
+  end
+
   def flip_cell(world, x, y) do
     Enum.with_index(world, fn row, h ->
       if x == h do
