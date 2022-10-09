@@ -78,14 +78,53 @@ defmodule GameOfLife.Simulate do
   end
 
   def is_east_alive?(cell_x, cell_y, world) do
-    is_cell_alive?(cell_x - 1, cell_y, world)
-  end
-
-  def is_west_alive?(cell_x, cell_y, world) do
     is_cell_alive?(cell_x + 1, cell_y, world)
   end
 
-  def is_cell_alive?(cell_x, cell_y, world) when cell_x >= 0 and cell_y >= 0 do
+  def is_west_alive?(cell_x, cell_y, world) do
+    is_cell_alive?(cell_x - 1, cell_y, world)
+  end
+
+  @doc "returns 1 for alive 0 for dead at x,y, wrapping around 1 past world borders"
+  def is_cell_alive?(cell_x, cell_y, world, count \\ nil)
+
+  def is_cell_alive?(cell_x, cell_y, world, count) when cell_x < 0 do
+    count = count || Enum.count(world) - 1
+    is_cell_alive?(count, cell_y, world, count)
+  end
+
+  def is_cell_alive?(cell_x, cell_y, world, count) do
+    count = count || Enum.count(world) - 1
+
+    x =
+      if cell_x > count do
+        0
+      else
+        cell_x
+      end
+
+    cell_row = Enum.at(world, x)
+
+    is_cell_y_alive?(cell_row, cell_y, count, [cell_x, x])
+  end
+
+  def is_cell_y_alive?(cell_row, cell_y, count, cell_x) when cell_y < 0 do
+    is_cell_y_alive?(cell_row, count, count, cell_x)
+  end
+
+  def is_cell_y_alive?(cell_row, cell_y, count, _cell_x) do
+    y =
+      if cell_y > count do
+        0
+      else
+        cell_y
+      end
+
+    Enum.at(cell_row, y) == 1
+  end
+
+  @doc "returns 1 for alive 0 for dead at x,y, past world borders are all dead"
+  def is_cell_alive_dead_borders?(cell_x, cell_y, world) when cell_x >= 0 and cell_y >= 0 do
     cell_row = Enum.at(world, cell_x)
 
     if cell_row != nil do
@@ -95,7 +134,7 @@ defmodule GameOfLife.Simulate do
     end
   end
 
-  def is_cell_alive?(cell_x, cell_y, _world) when cell_x < 0 or cell_y < 0 do
+  def is_cell_alive_dead_borders?(cell_x, cell_y, _world) when cell_x < 0 or cell_y < 0 do
     false
   end
 end
