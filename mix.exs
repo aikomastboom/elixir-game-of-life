@@ -31,7 +31,8 @@ defmodule GameOfLife.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:phoenix_live_view, "~> 0.18"}
+      {:phoenix_live_view, "~> 0.18"},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false}
     ]
   end
 end
